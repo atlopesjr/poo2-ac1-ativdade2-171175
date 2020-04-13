@@ -3,39 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Funcionarios</title>
 </head>
 <body>
     <div id="cadastra-funcionario">
-        <form th:action="@{/cadastrar}" method="POST">
-            <input type="hidden" value="0">
-            <label>Nome</label>
-            <input type="text" name="nome"><br /><br />
-            <label>Departamento</label>
-            <input type="text" name="departamento"><br /><br />
-            <label>Cargo</label>
-            <input type="text" name="cargo"><br /><br />
-            <label>Salario</label>
-            <input type="number" name="salario" min="0"><br /><br />
-            <input type="submit" name="cadastrar"><br /><br />
-        </form>
+        <div id="cadastro-funcionario">
+            <br />
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formFuncionario"
+                data-whatever="@mdo">Cadastrar Funcionário</button>
+    
+            <div class="modal fade" id="formFuncionario" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel">Cadastrar Funcionário</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <form th:action="@{/cadastrar}" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="funcionario-nome" class="col-form-label">Nome:</label>
+                                <input type="text" class="form-control" name="nome">
+                            </div>
+                            <div class="form-group">
+                                <label for="funcionario-departamento" class="col-form-label">Departamento:</label>
+                                <input type="text" class="form-control" name="departamento">
+                            </div>
+                            <div class="form-group">
+                                <label for="funcionario-cargo" class="col-form-label">Cargo:</label>
+                                <input type="text" class="form-control" name="cargo">
+                            </div>
+                            <div class="form-group">
+                                <label for="funcionario-salario" class="col-form-label">Salario:</label>
+                                <input type="number" class="form-control" name="salario" min="0">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <input type="submit" class="btn btn-primary" name="cadastrar">
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="lista-funcionario">
-        <table>
-            <th>Codigo</th>
-            <th>Nome</th>
-            <th>Departamento</th>
-            <th>Cargo</th>
-            <th>Salario</th>
-            <tr>
-            </tr>
-            <tr th:each="funcionario : ${funcionarios}">
-                <td th:text="${funcionario.codigo}"></td>
-                <td th:text="${funcionario.nome}"></td>
-                <td th:text="${funcionario.departamento}"></td>
-                <td th:text="${funcionario.cargo}"></td>
-                <td th:text="${funcionario.salario}"></td>
-            </tr>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Cargo</th>
+                    <th scope="col">Salario</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="funcionario : ${funcionarios}">
+                    <td th:text="${funcionario.codigo}"></td>
+                    <td th:text="${funcionario.nome}"></td>
+                    <td th:text="${funcionario.departamento}"></td>
+                    <td th:text="${funcionario.cargo}"></td>
+                    <td th:text="${funcionario.salario}"></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </body>

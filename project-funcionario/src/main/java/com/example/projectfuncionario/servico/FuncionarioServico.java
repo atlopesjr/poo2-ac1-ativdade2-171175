@@ -21,7 +21,7 @@ public class FuncionarioServico {
         return repository.findAll();
     }
 
-    public Funcionario insertFuncionario(Funcionario funcionario){
-        return repository.save(funcionario);
+    public void insertFuncionario(Funcionario funcionario){
+        repository.save(funcionario);
     }
 }

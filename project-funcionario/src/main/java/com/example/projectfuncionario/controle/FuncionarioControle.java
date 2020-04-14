@@ -20,16 +20,13 @@ public class FuncionarioControle {
     private FuncionarioServico servico;
 
     @PostMapping("/cadastrar")
-    public ModelAndView insertFuncionario(@ModelAttribute Funcionario funcionario){
-        ModelAndView mv = new ModelAndView();
-        if(funcionario == null){
-            mv.setViewName("error");
+    public String insertFuncionario(@ModelAttribute Funcionario funcionario){
+        if(funcionario.getNome().trim().isEmpty() || funcionario.getDepartamento().trim().isEmpty() || funcionario.getCargo().trim().isEmpty() || funcionario.getSalario() < 0){
+            return "redirect:/error";
         } else {
             servico.insertFuncionario(funcionario);
-            mv.setViewName("redirect:/funcionarios");
+            return "redirect:/funcionarios";
         }
-        mv.addObject("funcionarios", funcionario);
-        return mv;
     }
 
     @GetMapping("/funcionarios")
